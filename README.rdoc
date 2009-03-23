@@ -1,0 +1,66 @@
+= ActiveRecord::Inheritance
+
+This is an experimental module, improving the inheritance support provided by Active Record.
+The Active Record released with RubyOnRails supports Single Table Inheritance pattern:
+	http://martinfowler.com/eaaCatalog/singleTableInheritance.html 
+
+The goal of this module is to write data in separate tables, as Class Table Inheritance pattern:
+	http://martinfowler.com/eaaCatalog/classTableInheritance.html
+	
+Reading data, to avoid the joins, it exploits to SQL views, emulating Concrete Table Inheritance pattern:
+	http://martinfowler.com/eaaCatalog/concreteTableInheritance.html
+
+
+Note: ActiveRecord::Inheritance overrides some ActiveRecord methods.
+
+
+== Usage
+
+=== Models
+
+  class Animal < ActiveRecord::Inheritance::Base
+  	...
+  end
+
+  class Mammal < Animal
+  	...
+  end
+
+  class Cat < Mammal
+  	...  
+  end
+
+  class Dog < Mammal
+  	...  
+  end
+
+
+=== Migrations 
+
+  class CreateAnimals < ActiveRecord::Inheritance::Migration
+  	...
+  end
+
+  class CreateMammals < ActiveRecord::Inheritance::Migration
+  	...
+  end
+
+  class CreateCats < ActiveRecord::Inheritance::Migration
+  	...
+  end
+
+  class CreateDogs < ActiveRecord::Inheritance::Migration
+  	...
+  end
+
+Note: the column names are not overridable. 
+
+
+== Author
+
+Author::                Franco Sellitto, ZHdK - Zurich University of the Arts
+						http://rails.lighthouseapp.com/users/33675
+
+== License
+
+Active Record Inheritance is released under the MIT license.
