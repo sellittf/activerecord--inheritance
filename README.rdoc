@@ -1,5 +1,7 @@
 = ActiveRecord::Inheritance
 
+== Class Table Inheritance for ActiveRecord
+
 This is an experimental module, improving the inheritance support provided by Active Record.
 The Active Record released with RubyOnRails supports Single Table Inheritance pattern:
 	http://martinfowler.com/eaaCatalog/singleTableInheritance.html 
