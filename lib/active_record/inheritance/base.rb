@@ -2,17 +2,6 @@ module ActiveRecord
   module Inheritance
     class Base < ActiveRecord::Base
 
-#    #####################
-#    def type
-#      self[:type]
-#    end
-#
-#    def type=(value)
-#      self[:type] = value
-#    end
-#    #####################
-
-
     # Overriding
     def create
       if self.id.nil? && connection.prefetch_primary_key?(self.class.table_name)
@@ -20,6 +9,8 @@ module ActiveRecord
       end
 
       # TODO crated_at, updated_at
+      # TODO autosave
+      
       self.type = self.class.name
 
       self.class.all_classes.each do |klass|
@@ -44,7 +35,7 @@ module ActiveRecord
         #                    "SET #{quoted_set.join(', ')} "
 
         self.id = connection.insert(statement, "#{self.class.name} Create",
-        self.class.primary_key, self.id, self.class.sequence_name)
+          self.class.primary_key, self.id, self.class.sequence_name)
       end
 
       @new_record = false
@@ -189,8 +180,8 @@ module ActiveRecord
         
         # Overriding
         def reset_table_name
-          name = read_table
-# TODO    name = (connection.table_exists?(read_table) ? read_table : write_table)
+#old#          name = read_table
+          name = (connection.table_exists?(read_table) ? read_table : write_table)
           set_table_name(name)
           name
         end
